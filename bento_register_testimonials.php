@@ -44,6 +44,15 @@ function bento_testimonials_shortcode() {
     // Inline CSS to enforce equal heights on testimonial cards
     $output = '
     <style>
+    @media (max-width: 600px) {
+        .item.testimonial-card {
+            margin: 30px auto 0 !important;
+            width: 100% !important;
+        }
+    }
+    @media (min-width: 600px) {
+        .owl-carousel.testimonials-container .testimonial-card {width: 100% !important;}
+    }
     .owl-carousel.testimonials-container {
         gap: 24px;
     }
@@ -93,18 +102,31 @@ function bento_testimonials_shortcode() {
     // Inline script to initialize Owl Carousel with autoplay and dots (bullets) only
     $output .= '
     <script>
-    jQuery(document).ready(function($) {
-        $(".owl-carousel.testimonials-container").owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 5000,
-            autoplayHoverPause: true,
-            nav: false,
-            dots: true
+        jQuery(document).ready(function($) {
+            $(".owl-carousel.testimonials-container").owlCarousel({
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
+                nav: false,
+                dots: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    850: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 3
+                    }
+                }
+            });
         });
-    });
     </script>
     ';
 
